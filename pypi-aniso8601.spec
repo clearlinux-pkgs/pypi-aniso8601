@@ -4,7 +4,7 @@
 #
 Name     : pypi-aniso8601
 Version  : 9.0.1
-Release  : 1
+Release  : 2
 URL      : https://files.pythonhosted.org/packages/cb/72/be3db445b03944bfbb2b02b82d00cb2a2bcf96275c4543f14bf60fa79e12/aniso8601-9.0.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cb/72/be3db445b03944bfbb2b02b82d00cb2a2bcf96275c4543f14bf60fa79e12/aniso8601-9.0.1.tar.gz
 Summary  : A library for parsing ISO 8601 strings.
@@ -14,6 +14,9 @@ Requires: pypi-aniso8601-license = %{version}-%{release}
 Requires: pypi-aniso8601-python = %{version}-%{release}
 Requires: pypi-aniso8601-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 =========
@@ -65,15 +68,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669866536
+export SOURCE_DATE_EPOCH=1672249523
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -97,7 +100,7 @@ PYTHONPATH=%{buildroot}$(python -c "import sys; print(sys.path[-1])") python set
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-aniso8601
-cp %{_builddir}/aniso8601-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-aniso8601/9b88ba169f8eea0819e45e0d375575c07c6af219 || :
+cp %{_builddir}/aniso8601-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-aniso8601/9b88ba169f8eea0819e45e0d375575c07c6af219
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
