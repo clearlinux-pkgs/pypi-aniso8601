@@ -4,7 +4,7 @@
 #
 Name     : pypi-aniso8601
 Version  : 9.0.1
-Release  : 3
+Release  : 4
 URL      : https://files.pythonhosted.org/packages/cb/72/be3db445b03944bfbb2b02b82d00cb2a2bcf96275c4543f14bf60fa79e12/aniso8601-9.0.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cb/72/be3db445b03944bfbb2b02b82d00cb2a2bcf96275c4543f14bf60fa79e12/aniso8601-9.0.1.tar.gz
 Summary  : A library for parsing ISO 8601 strings.
